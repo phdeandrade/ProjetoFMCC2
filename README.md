@@ -1,4 +1,4 @@
-## TCR Descomplido
+## TCR Descomplicado
 
 Projeto para a disciplina de Fundamentos de Matemática para Computação 2 (FMCC2).
 
