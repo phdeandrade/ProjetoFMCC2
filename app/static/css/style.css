@@ -258,3 +258,12 @@ footer {
     text-decoration: none;
     margin: 0 0.5rem;
 }
+
+ul {
+    margin-bottom: 1.5rem;
+    margin-left: 2rem; /* Isso também afasta as bolinhas da lista da borda da tela, deixando a leitura melhor */
+}
+
+li {
+    margin-bottom: 0.5rem; /* Dá um respiro entre um item e outro da lista */
+}

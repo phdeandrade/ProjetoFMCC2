@@ -6,6 +6,14 @@
 <title>Sobre o TCR - TCR Descomplicado</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body data-theme="dark">
 
@@ -22,6 +30,24 @@
     <h1>Sobre o Teorema Chinês dos Restos</h1>
     <p>O Teorema Chinês dos Restos (TCR) é um resultado fundamental na aritmética modular que permite resolver sistemas de congruências lineares[cite: 2, 3].</p>
     
+    <h2>O que é uma Congruência Linear?</h2>
+    <p>Para compreendermos as congruências lineares, o melhor ponto de partida é a metáfora do relógio.</p>
+    <p>Imagine que são 8h. Se avançarmos 3 horas, o relógio apontará para as 11h. No entanto, se avançarmos 25 horas, O ponteiro não irá mostrar "33h". Em vez disso, ele dará duas voltas completas e irá avançar uma hora, assim marcando 9h.</p>
+    <p>Isso ocorre porque a estrutura de um relógio trabalha em módulo 12. Ou seja, os valores limitam-se a esse ciclo e recomeçam a cada 12 horas. Na notação matemática, expressamos essa situação da seguinte maneira:</p>
+    <p><strong>$8 + 25 \equiv 9 \pmod{12}$</strong></p>
+    <p>De uma maneira mais ampla, a expressão $a \equiv b \pmod n$ indica que, ao dividir o valor $a$ e o valor $b$ pelo módulo $n$, ambos gerarão exatamente o mesmo resto. No nosso caso prático, se você dividir 33 (que é a soma de 8 + 25) por 12, o resultado é 2 (representando as voltas completas do ponteiro) e o resto é justamente 9!</p>
+
+    <p>A forma canônica de uma congruência linear é:</p>
+    <p><strong>$ax \equiv b \pmod n$</strong></p>
+    <p>Em que:</p>
+    <ul>
+        <li><strong>$a$, $b$ e $n$:</strong> são números inteiros.</li>
+        <li><strong>$x$:</strong> é a incógnita, ou seja, o que queremos descobrir.</li>
+        <li><strong>(mod $n$):</strong> significa "módulo $n$". Isso nos avisa que a principal preocupação é com o resto da divisão por $n$.</li>
+    </ul>
+
+    <p>Com esse conceito de ciclos e restos bem estabelecido, podemos aplicar a mesma lógica para resolver sistemas de equações.</p>
+
     <h2>Congruências Lineares</h2>
     <p>Uma congruência linear possui o formato $ax \equiv b \pmod n$, onde $a, b, n$ são inteiros e $x$ é a incógnita[cite: 11].</p>
     <p>Para verificar se há solução, analisamos se $d = \text{mdc}(a, n)$ divide $b$[cite: 16, 17, 18]. Se não dividir, como em $2x \equiv 1 \pmod 4$ onde $\text{mdc}(2,4) = 2$ não divide 1, o sistema não tem solução[cite: 13, 19, 20].</p>
