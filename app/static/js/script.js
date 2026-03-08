@@ -18,15 +18,6 @@ function toggleTheme() {
     }
 }
 
-function toggleOperation(selectEl) {
-    const inputEl = selectEl.nextElementSibling;
-    if (selectEl.value === 'none') {
-        inputEl.style.display = 'none';
-    } else {
-        inputEl.style.display = 'inline-block';
-    }
-}
-
 function addEquation() {
     const list = document.getElementById('equations-list');
     if (!list) return;
@@ -34,14 +25,8 @@ function addEquation() {
     const newRow = document.createElement('div');
     newRow.className = 'equation-row';
     newRow.innerHTML = `
-        <input type="number"> x 
-        <select onchange="toggleOperation(this)">
-            <option value="none" selected></option>
-            <option value="-">-</option>
-            <option value="+">+</option>
-        </select>
-        <input type="number" class="op-val" style="display: none;">
-        &equiv; <input type="number"> (mod <input type="number">)
+        <input type="text" placeholder="Ex: 2x + 1">
+        ≡ <input type="number" value=""> (mod <input type="number" value="">)
         <button class="btn-remove" onclick="removeEquation(this)">✖</button>
     `;
     list.appendChild(newRow);

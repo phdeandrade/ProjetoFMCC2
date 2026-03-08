@@ -6,6 +6,26 @@
 <title>TCR Descomplicado</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+    .info-box {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #4CAF50;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        font-size: 0.95em;
+        line-height: 1.5;
+    }
+    
+    .equation-row input[type="text"] {
+        width: 120px;
+        text-align: center;
+    }
+</style>
 </head>
 <body data-theme="dark">
 
@@ -20,28 +40,17 @@
 
 <main>
     <h1>Digite seu sistema de equações</h1>
+
     <div class="equation-container">
         <div id="equations-list">
             <div class="equation-row">
-                <input type="number" value="1"> x 
-                <select onchange="toggleOperation(this)">
-                    <option value="none"></option>
-                    <option value="-" selected>-</option>
-                    <option value="+">+</option>
-                </select>
-                <input type="number" class="op-val" value="3">
-                &equiv; <input type="number" value="5"> (mod <input type="number" value="10">)
+                <input type="text" value="x - 3" placeholder="Ex: 2x + 1">
+                ≡ <input type="number" value="5"> (mod <input type="number" value="10">)
                 <button class="btn-remove" onclick="removeEquation(this)">✖</button>
             </div>
             <div class="equation-row">
-                <input type="number" value="17"> x 
-                <select onchange="toggleOperation(this)">
-                    <option value="none" selected></option>
-                    <option value="-">-</option>
-                    <option value="+">+</option>
-                </select>
-                <input type="number" class="op-val" style="display: none;">
-                &equiv; <input type="number" value="5"> (mod <input type="number" value="29">)
+                <input type="text" value="17x" placeholder="Ex: x - 2">
+                ≡ <input type="number" value="5"> (mod <input type="number" value="29">)
                 <button class="btn-remove" onclick="removeEquation(this)">✖</button>
             </div>
         </div>
@@ -54,52 +63,48 @@
         
         <div class="step">
             <div class="step-title">Passo 1: Simplificar a Equação 1</div>
-            <p>Equação original: x - 3 &equiv; 5 (mod 10)</p>
-            <p>Isolando o x (somando 3 em ambos os lados):</p>
-            <p>x &equiv; 5 + 3 (mod 10)</p>
-            <p><strong>x &equiv; 8 (mod 10)</strong></p>
+            <p>Equação original: \( x - 3 \equiv 5 \pmod{10} \)</p>
+            <p>Isolando o \( x \) (somando 3 em ambos os lados):</p>
+            <p>\( x \equiv 5 + 3 \pmod{10} \)</p>
+            <p><strong>\( x \equiv 8 \pmod{10} \)</strong></p>
         </div>
 
         <div class="step">
             <div class="step-title">Passo 2: Simplificar a Equação 2</div>
-            <p>Equação: 17x &equiv; 5 (mod 29)</p>
-            <p>Sabemos que 17 &equiv; -12 (mod 29)</p>
-            <p>-12x &equiv; 5 (mod 29)</p>
-            <p>Multiplicamos ambos os lados por -1:</p>
-            <p>12x &equiv; -5 (mod 29)</p>
-            <p>Como -5 &equiv; 24 (mod 29):</p>
-            <p>12x &equiv; 24 (mod 29)</p>
-            <p><strong>x &equiv; 2 (mod 29)</strong></p>
+            <p>Equação: \( 17x \equiv 5 \pmod{29} \)</p>
+            <p>Sabemos que \( 17 \equiv -12 \pmod{29} \)</p>
+            <p>\( -12x \equiv 5 \pmod{29} \)</p>
+            <p>Multiplicamos ambos os lados por \(-1\):</p>
+            <p>\( 12x \equiv -5 \pmod{29} \)</p>
+            <p>Como \( -5 \equiv 24 \pmod{29} \):</p>
+            <p>\( 12x \equiv 24 \pmod{29} \)</p>
+            <p><strong>\( x \equiv 2 \pmod{29} \)</strong></p>
         </div>
 
         <div class="step">
             <div class="step-title">Passo 3: Aplicar o Teorema Chinês dos Restos (TCR)</div>
             <p>Sistema reduzido:</p>
-            <p>x &equiv; 8 (mod 10)</p>
-            <p>x &equiv; 2 (mod 29)</p>
+            <p>\( x \equiv 8 \pmod{10} \)</p>
+            <p>\( x \equiv 2 \pmod{29} \)</p>
             <br>
-            <p>M = 10 * 29 = 290</p>
-            <p>M₁ = 29, M₂ = 10</p>
-            <p>Inversos modulares (y₁ e y₂):</p>
-            <p>y₁ * 29 &equiv; 1 (mod 10) &rarr; y₁ = 9</p>
-            <p>y₂ * 10 &equiv; 1 (mod 29) &rarr; y₂ = 3</p>
+            <p>\( M = 10 \cdot 29 = 290 \)</p>
+            <p>\( M_1 = 29, \ M_2 = 10 \)</p>
+            <p>Inversos modulares (\( y_1 \) e \( y_2 \)):</p>
+            <p>\( y_1 \cdot 29 \equiv 1 \pmod{10} \implies y_1 = 9 \)</p>
+            <p>\( y_2 \cdot 10 \equiv 1 \pmod{29} \implies y_2 = 3 \)</p>
             <br>
-            <p>x = (8 * 29 * 9 + 2 * 10 * 3) mod 290</p>
-            <p>x = (2088 + 60) mod 290</p>
-            <p>x = 2148 mod 290</p>
-            <p><strong>Solução final: x &equiv; 118 (mod 290)</strong></p>
+            <p>\( x \equiv (8 \cdot 29 \cdot 9 + 2 \cdot 10 \cdot 3) \pmod{290} \)</p>
+            <p>\( x \equiv (2088 + 60) \pmod{290} \)</p>
+            <p>\( x \equiv 2148 \pmod{290} \)</p>
+            <p><strong>Solução final: \( x \equiv 118 \pmod{290} \)</strong></p>
         </div>
     </div>
 </main>
 
 <footer>
-    <div class="footer-content">
-        <p>Computação UFCG - FMCC 2</p>
-        <p>Matemática para Computação 2</p>
-        <div class="social-links">
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
-        </div>
+   <div class="footer-content">
+        <p>Computação@UFCG</p>
+        <p>Fundamentos de Matemática para Ciência da Computação 2 (FMCC2)</p>
     </div>
 </footer>
 

@@ -107,6 +107,16 @@ p {
     margin-bottom: 1rem;
 }
 
+.info-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #4CAF50;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
 .equation-container {
     background-color: var(--card-bg);
     padding: 2rem;
@@ -130,9 +140,8 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-input[type="number"] {
+input[type="number"], input[type="text"] {
     -moz-appearance: textfield;
-    width: 60px;
     padding: 0.5rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -142,17 +151,15 @@ input[type="number"] {
     text-align: center;
 }
 
-select {
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    cursor: pointer;
+input[type="number"] {
+    width: 60px;
 }
 
-input[type="number"]:focus, select:focus {
+.equation-row input[type="text"] {
+    width: 120px;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
     outline: none;
     border-color: var(--primary-blue);
 }
@@ -261,9 +268,9 @@ footer {
 
 ul {
     margin-bottom: 1.5rem;
-    margin-left: 2rem; /* Isso também afasta as bolinhas da lista da borda da tela, deixando a leitura melhor */
+    margin-left: 2rem;
 }
 
 li {
-    margin-bottom: 0.5rem; /* Dá um respiro entre um item e outro da lista */
+    margin-bottom: 0.5rem;
 }
