@@ -37,7 +37,7 @@
 
 <nav>
     <a href="{{ url_for('index') }}" class="logo">
-        <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px; vertical-align: middle; margin-right: 10px;">
+        <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px">
         TCR Descomplicado
     </a>
     <div class="nav-links">
@@ -73,41 +73,52 @@
         <h2>Resolução Passo a Passo</h2>
         
         <div class="step">
-            <div class="step-title">Passo 1: Simplificar a Equação 1</div>
-            <p>Equação original: \( x - 3 \equiv 5 \pmod{10} \)</p>
-            <p>Isolando o \( x \) (somando 3 em ambos os lados):</p>
-            <p>\( x \equiv 5 + 3 \pmod{10} \)</p>
-            <p><strong>\( x \equiv 8 \pmod{10} \)</strong></p>
+            <div class="step-title">Passo 1: Verificação de Solução</div>
+            <p>Antes de resolver, calculamos se \( d = \text{mdc}(a, n) \) divide \( b \) para garantir que as equações têm solução.</p>
+            <br>
+            <p><strong>Equação 1:</strong> \( x - 3 \equiv 5 \implies x \equiv 8 \pmod{10} \)</p>
+            <p>\( \text{mdc}(1, 10) = 1 \). Como 1 divide 8, <strong>tem solução!</strong></p>
+            <br>
+            <p><strong>Equação 2:</strong> \( 17x \equiv 5 \pmod{29} \)</p>
+            <p>\( \text{mdc}(17, 29) = 1 \). Como 1 divide 5, <strong>tem solução!</strong></p>
         </div>
 
         <div class="step">
-            <div class="step-title">Passo 2: Simplificar a Equação 2</div>
-            <p>Equação: \( 17x \equiv 5 \pmod{29} \)</p>
+            <div class="step-title">Passo 2: Simplificação das Equações</div>
+            <p>Agora, isolamos o \( x \) em cada equação para deixá-las no formato canônico \( x \equiv c \pmod m \).</p>
+            <br>
+            <p><strong>Equação 1:</strong> \( x \equiv 8 \pmod{10} \) (Já está simplificada)</p>
+            <br>
+            <p><strong>Equação 2:</strong> \( 17x \equiv 5 \pmod{29} \)</p>
             <p>Sabemos que \( 17 \equiv -12 \pmod{29} \)</p>
             <p>\( -12x \equiv 5 \pmod{29} \)</p>
             <p>Multiplicamos ambos os lados por \(-1\):</p>
             <p>\( 12x \equiv -5 \pmod{29} \)</p>
             <p>Como \( -5 \equiv 24 \pmod{29} \):</p>
             <p>\( 12x \equiv 24 \pmod{29} \)</p>
+            <p>Dividindo ambos os lados por 12:</p>
             <p><strong>\( x \equiv 2 \pmod{29} \)</strong></p>
         </div>
 
         <div class="step">
-            <div class="step-title">Passo 3: Aplicar o Teorema Chinês dos Restos (TCR)</div>
-            <p>Sistema reduzido:</p>
+            <div class="step-title">Passo 3: Resolução do TCR</div>
+            <p>Com o sistema reduzido, aplicamos o Teorema Chinês dos Restos:</p>
             <p>\( x \equiv 8 \pmod{10} \)</p>
             <p>\( x \equiv 2 \pmod{29} \)</p>
             <br>
+            <p><strong>Cálculo dos Módulos:</strong></p>
             <p>\( M = 10 \cdot 29 = 290 \)</p>
             <p>\( M_1 = 29, \ M_2 = 10 \)</p>
-            <p>Inversos modulares (\( y_1 \) e \( y_2 \)):</p>
+            <br>
+            <p><strong>Inversos modulares (\( y_1 \) e \( y_2 \)):</strong></p>
             <p>\( y_1 \cdot 29 \equiv 1 \pmod{10} \implies y_1 = 9 \)</p>
             <p>\( y_2 \cdot 10 \equiv 1 \pmod{29} \implies y_2 = 3 \)</p>
             <br>
+            <p><strong>Fórmula Final:</strong></p>
             <p>\( x \equiv (8 \cdot 29 \cdot 9 + 2 \cdot 10 \cdot 3) \pmod{290} \)</p>
             <p>\( x \equiv (2088 + 60) \pmod{290} \)</p>
             <p>\( x \equiv 2148 \pmod{290} \)</p>
-            <p><strong>Solução final: \( x \equiv 118 \pmod{290} \)</strong></p>
+            <p><strong>Solução: \( x \equiv 118 \pmod{290} \)</strong></p>
         </div>
     </div>
 </main>

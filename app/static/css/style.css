@@ -51,6 +51,9 @@ nav {
     font-weight: bold;
     color: var(--primary-blue);
     text-decoration: none;
+    display: flex; 
+    align-items: center;
+    gap: 10px;
 }
 
 .nav-links {
