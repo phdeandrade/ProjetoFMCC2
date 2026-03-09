@@ -59,9 +59,74 @@ function removeEquation(btnElement) {
     }
 }
 
+function parseEquationString(eqStr) {
+    const cleanStr = eqStr.replace(/\s+/g, '');
+    
+    const xMatch = cleanStr.match(/(^|[+-])(\d*)x/);
+    
+    if (!xMatch) {
+        return null; 
+    }
+    
+    const sign = xMatch[1] === '-' ? -1 : 1;
+    const coef = xMatch[2] === '' ? 1 : parseInt(xMatch[2], 10);
+    const a = sign * coef;
+    
+    const noXStr = cleanStr.replace(/(^|[+-])\d*x/, '');
+    
+    let b = 0;
+    if (noXStr !== '') {
+        b = parseInt(noXStr, 10);
+        if (isNaN(b)) return null;
+    }
+    
+    return { a: a, b: b };
+}
+
+function collectEquationsData() {
+    const rows = document.querySelectorAll('.equation-row'); 
+    const equacoesParaBackend = [];
+    
+    for (let row of rows) {
+        const eqInput = row.querySelector('.eq-input').value; 
+        const numInputs = row.querySelectorAll('.num-input'); 
+        const cInput = numInputs[0].value; 
+        const nInput = numInputs[1].value; 
+        
+        if (!eqInput || !cInput || !nInput) {
+            alert("Por favor, preencha todos os campos antes de gerar o passo a passo.");
+            return null; 
+        }
+        
+        const parsedEq = parseEquationString(eqInput);
+        if (!parsedEq) {
+            alert(`A equação "${eqInput}" está num formato inválido. Use formatos como "2x + 1" ou "x - 3".`);
+            return null;
+        }
+        
+        equacoesParaBackend.push({
+            "a": parsedEq.a,             // termo dependente de x
+            "b": parsedEq.b,             // termo independente com sinal (0 se não houver)
+            "c": parseInt(cInput, 10),   // resultado da congruência
+            "n": parseInt(nInput, 10)    // módulo
+        });
+    }
+    
+    return { "equacoes": equacoesParaBackend };
+}
+
 function generateSteps() {
+    const dados = collectEquationsData();
+    
+    if (!dados) return; 
+
+    console.log("JSON pronto para enviar ao Backend em Python:", JSON.stringify(dados, null, 2));
+
     const solution = document.getElementById('solution-container');
     if (solution) {
         solution.style.display = 'block';
     }
+    
+    // NOTA FUTURA: Quando o código Python do tcr_solver.py estiver pronto, 
+    // é aqui dentro que irá apagar o console.log e colocar o comando fetch('/resolver', ...)
 }
