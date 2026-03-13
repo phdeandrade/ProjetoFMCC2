@@ -1,42 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icone.png') }}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sobre o Projeto - TCR Descomplicado</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-</head>
-<body data-theme="dark">
+{% extends "base.html" %}
 
-<nav>
-    <a href="{{ url_for('index') }}" class="logo">
-        <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px">
-        TCR Descomplicado
-    </a>
-    <div class="nav-links">
-        <a href="{{ url_for('about') }}">Sobre o TCR</a>
-        <a href="{{ url_for('info') }}">Sobre o Projeto</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    </div>
-</nav>
+{% block title %}Sobre o Projeto - TCR Descomplicado{% endblock %}
 
-<main>
-    <h1>Sobre o Projeto</h1>
-    <p>O "TCR Descomplicado" detalha o passo a passo da resolução de sistemas de congruências lineares, facilitando a 
-        visualização do passo a passo desse teorema.</p>
-    <p>Este projeto foi desenvolvido no âmbito da disciplina de Fundamentos de Matemática para Ciência da Computação 2 (FMCC2), 
-        ministrada por Tiago Lima Massoni, na Universidade Federal de Campina Grande (UFCG)
-    </p>
-</main>
-
-<footer>
-   <div class="footer-content">
-        <p>Computação@UFCG</p>
-        <p>Fundamentos de Matemática para Ciência da Computação 2 (FMCC2)</p>
-    </div>
-</footer>
-
-</body>
-</html>
+{% block content %}
+<h1>Sobre o Projeto</h1>
+<p>O "TCR Descomplicado" detalha o passo a passo da resolução de sistemas de congruências lineares, facilitando a
+    visualização do passo a passo desse teorema.</p>
+<p>Este projeto foi desenvolvido no âmbito da disciplina de Fundamentos de Matemática para Ciência da Computação 2 (FMCC2),
+    ministrada por Tiago Lima Massoni, na Universidade Federal de Campina Grande (UFCG).
+</p>
+{% endblock %}

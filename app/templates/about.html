@@ -1,75 +1,44 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icone.png') }}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sobre o TCR - TCR Descomplicado</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-</head>
-<body data-theme="dark">
+{% extends "base.html" %}
 
-<nav>
-    <a href="{{ url_for('index') }}" class="logo">
-        <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px">
-        TCR Descomplicado
-    </a>
-    <div class="nav-links">
-        <a href="{{ url_for('about') }}">Sobre o TCR</a>
-        <a href="{{ url_for('info') }}">Sobre o Projeto</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    </div>
-</nav>
+{% block title %}Sobre o TCR - TCR Descomplicado{% endblock %}
 
-<main>
-    <h1>Sobre o Teorema Chinês dos Restos</h1>
-    <p>O Teorema Chinês dos Restos (TCR) é um resultado matemático fascinante e milenar da aritmética modular, sendo a principal ferramenta para resolver sistemas de congruências lineares.</p>
-    
-    <h2>Uma História Milenar</h2>
-    <p>A origem do teorema remonta à China antiga. O primeiro registro conhecido deste problema aparece no antigo manual de matemática chinês <em>Sunzi Suanjing</em> (O Clássico Matemático de Sunzi), escrito entre os séculos III e V d.C.</p>
-    <p>O problema original não era apresentado com fórmulas, mas sim como um enigma prático do dia a dia:</p>
-    <blockquote>
-        "Temos um número de objetos, mas não sabemos exatamente quantos. Se os contarmos de 3 em 3, sobram 2. Se contarmos de 5 em 5, sobram 3. Se contarmos de 7 em 7, sobram 2. Quantos objetos temos?"
-    </blockquote>
-    <p>A menor resposta para este enigma é 23. Séculos depois, no ano de 1247, o brilhante matemático chinês Qin Jiushao publicou o <em>Shushu Jiuzhang</em> (Tratado Matemático em Nove Seções), onde formalizou um algoritmo completo para resolver qualquer sistema desse tipo. O conceito também foi estudado independentemente por matemáticos indianos, como Aryabhata no século VI, para realizar cálculos astronômicos complexos sobre a posição dos planetas.</p>
+{% block content %}
+<h1>Sobre o Teorema Chinês dos Restos</h1>
+<p>O Teorema Chinês dos Restos (TCR) é um resultado matemático fascinante e milenar da aritmética modular, sendo a principal ferramenta para resolver sistemas de congruências lineares.</p>
 
-    <h2>O que o TCR nos garante?</h2>
-    <p>O Teorema Chinês dos Restos afirma que, se você tem um sistema de equações modulares (congruências), existe uma solução única para a incógnita dentro de um determinado intervalo, <strong>desde que os divisores (módulos) sejam coprimos entre si</strong>. Ou seja, o Máximo Divisor Comum (MDC) entre qualquer par de módulos do sistema deve ser obrigatoriamente 1.</p>
-    <p>Na prática, o TCR permite pegar um problema com um módulo gigantesco e quebrá-lo em vários problemas menores e mais fáceis de calcular. Hoje em dia, essa propriedade é vital na Ciência da Computação. Ela é amplamente utilizada em criptografia moderna (como na otimização da descriptografia do algoritmo RSA) e na manipulação de números inteiros extremamente grandes.</p>
+<h2>Uma História Milenar</h2>
+<p>A origem do teorema remonta à China antiga. O primeiro registro conhecido deste problema aparece no antigo manual de matemática chinês <em>Sunzi Suanjing</em> (O Clássico Matemático de Sunzi), escrito entre os séculos III e V d.C.</p>
+<p>O problema original não era apresentado com fórmulas, mas sim como um enigma prático do dia a dia:</p>
+<blockquote>
+    "Temos um número de objetos, mas não sabemos exatamente quantos. Se os contarmos de 3 em 3, sobram 2. Se contarmos de 5 em 5, sobram 3. Se contarmos de 7 em 7, sobram 2. Quantos objetos temos?"
+</blockquote>
+<p>A menor resposta para este enigma é 23. Séculos depois, no ano de 1247, o brilhante matemático chinês Qin Jiushao publicou o <em>Shushu Jiuzhang</em> (Tratado Matemático em Nove Seções), onde formalizou um algoritmo completo para resolver qualquer sistema desse tipo. O conceito também foi estudado independentemente por matemáticos indianos, como Aryabhata no século VI, para realizar cálculos astronômicos complexos sobre a posição dos planetas.</p>
 
-    <h2>O que é uma Congruência Linear?</h2>
-    <p>Para compreendermos as congruências lineares, o melhor ponto de partida é a metáfora do relógio.</p>
-    <p>Imagine que são 8h. Se avançarmos 3 horas, o relógio apontará para as 11h. No entanto, se avançarmos 25 horas, O ponteiro não irá mostrar "33h". Em vez disso, ele dará duas voltas completas e irá avançar uma hora, assim marcando 9h.</p>
-    <p>Isso ocorre porque a estrutura de um relógio trabalha em módulo 12. Ou seja, os valores limitam-se a esse ciclo e recomeçam a cada 12 horas. Na notação matemática, expressamos essa situação da seguinte maneira:</p>
-    <p><strong>8 + 25 ≡ 9 (mod 12)</strong></p>
-    <p>De uma maneira mais ampla, a expressão a ≡ b (mod n) indica que, ao dividir o valor a e o valor b pelo módulo n, ambos gerarão exatamente o mesmo resto. No nosso caso prático, se você dividir 33 (que é a soma de 8 + 25) por 12, o resultado é 2 (representando as voltas completas do ponteiro) e o resto é justamente 9!</p>
+<h2>O que o TCR nos garante?</h2>
+<p>O Teorema Chinês dos Restos afirma que, se você tem um sistema de equações modulares (congruências), existe uma solução única para a incógnita dentro de um determinado intervalo, <strong>desde que os divisores (módulos) sejam coprimos entre si</strong>. Ou seja, o Máximo Divisor Comum (MDC) entre qualquer par de módulos do sistema deve ser obrigatoriamente 1.</p>
+<p>Na prática, o TCR permite pegar um problema com um módulo gigantesco e quebrá-lo em vários problemas menores e mais fáceis de calcular. Hoje em dia, essa propriedade é vital na Ciência da Computação. Ela é amplamente utilizada em criptografia moderna (como na otimização da descriptografia do algoritmo RSA) e na manipulação de números inteiros extremamente grandes.</p>
 
-    <p>A forma canônica de uma congruência linear é:</p>
-    <p><strong>ax ≡ b (mod n)</strong></p>
-    <p>Em que:</p>
-    <ul>
-        <li><strong>a, b e n:</strong> são números inteiros.</li>
-        <li><strong>x:</strong> é a incógnita, ou seja, o que queremos descobrir.</li>
-        <li><strong>(mod n):</strong> significa "módulo n". Isso nos avisa que a principal preocupação é com o resto da divisão por n.</li>
-    </ul>
+<h2>O que é uma Congruência Linear?</h2>
+<p>Para compreendermos as congruências lineares, o melhor ponto de partida é a metáfora do relógio.</p>
+<p>Imagine que são 8h. Se avançarmos 3 horas, o relógio apontará para as 11h. No entanto, se avançarmos 25 horas, o ponteiro não irá mostrar "33h". Em vez disso, ele dará duas voltas completas e irá avançar uma hora, assim marcando 9h.</p>
+<p>Isso ocorre porque a estrutura de um relógio trabalha em módulo 12. Ou seja, os valores limitam-se a esse ciclo e recomeçam a cada 12 horas. Na notação matemática, expressamos essa situação da seguinte maneira:</p>
+<p><strong>8 + 25 ≡ 9 (mod 12)</strong></p>
+<p>De uma maneira mais ampla, a expressão a ≡ b (mod n) indica que, ao dividir o valor a e o valor b pelo módulo n, ambos gerarão exatamente o mesmo resto. No nosso caso prático, se você dividir 33 (que é a soma de 8 + 25) por 12, o resultado é 2 (representando as voltas completas do ponteiro) e o resto é justamente 9!</p>
 
-    <p>Com esse conceito de ciclos e restos bem estabelecido, podemos aplicar a mesma lógica para resolver sistemas de equações.</p>
+<p>A forma canônica de uma congruência linear é:</p>
+<p><strong>ax ≡ b (mod n)</strong></p>
+<p>Em que:</p>
+<ul>
+    <li><strong>a, b e n:</strong> são números inteiros.</li>
+    <li><strong>x:</strong> é a incógnita, ou seja, o que queremos descobrir.</li>
+    <li><strong>(mod n):</strong> significa "módulo n". Isso nos avisa que a principal preocupação é com o resto da divisão por n.</li>
+</ul>
 
-    <h2>Condições e Soluções</h2>
-    <p>Uma congruência linear possui o formato ax ≡ b (mod n), onde a, b, n são inteiros e x é a incógnita.</p>
-    <p>Para verificar se há solução em uma equação individual, analisamos se d = mdc(a, n) divide b. Se não dividir, como em 2x ≡ 1 (mod 4) onde mdc(2, 4) = 2 não divide 1, o sistema não tem solução.</p>
-    
-    <p>Quando a congruência tem solução, ela possui exatamente d soluções não-congruentes dois a dois.</p>
-    <p>Para encontrar a solução e calcular inversos modulares (passo essencial no TCR), utiliza-se o Algoritmo de Euclides estendido. Para a inversão, é obrigatório que mdc(a, m) = 1.</p>
-</main>
+<p>Com esse conceito de ciclos e restos bem estabelecido, podemos aplicar a mesma lógica para resolver sistemas de equações.</p>
 
-<footer>
-    <div class="footer-content">
-        <p>Computação@UFCG</p>
-        <p>Fundamentos de Matemática para Ciência da Computação 2 (FMCC2)</p>
-    </div>
-</footer>
-
-</body>
-</html>
+<h2>Condições e Soluções</h2>
+<p>Uma congruência linear possui o formato ax ≡ b (mod n), onde a, b, n são inteiros e x é a incógnita.</p>
+<p>Para verificar se há solução em uma equação individual, analisamos se d = mdc(a, n) divide b. Se não dividir, como em 2x ≡ 1 (mod 4) onde mdc(2, 4) = 2 não divide 1, o sistema não tem solução.</p>
+<p>Quando a congruência tem solução, ela possui exatamente d soluções não-congruentes dois a dois.</p>
+<p>Para encontrar a solução e calcular inversos modulares (passo essencial no TCR), utiliza-se o Algoritmo de Euclides estendido. Para a inversão, é obrigatório que mdc(a, m) = 1.</p>
+{% endblock %}

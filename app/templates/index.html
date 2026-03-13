@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/icone.png') }}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TCR Descomplicado</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+{% extends "base.html" %}
 
+{% block title %}TCR Descomplicado{% endblock %}
+
+{% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script>
     MathJax = {
@@ -19,123 +14,32 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-    .info-box {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-left: 4px solid #4CAF50;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 4px;
-        font-size: 0.95em;
-        line-height: 1.5;
-    }
-    
-    .equation-row .eq-input {
-        width: 120px;
-        text-align: center;
-    }
-
-    .equation-row .num-input {
-        width: 60px;
-        text-align: center;
-    }
+    .equation-row .eq-input { width: 120px; text-align: center; }
+    .equation-row .num-input { width: 60px; text-align: center; }
 </style>
-</head>
-<body data-theme="dark">
+{% endblock %}
 
-<nav>
-    <a href="{{ url_for('index') }}" class="logo">
-        <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px">
-        TCR Descomplicado
-    </a>
-    <div class="nav-links">
-        <a href="{{ url_for('about') }}">Sobre o TCR</a>
-        <a href="{{ url_for('info') }}">Sobre o Projeto</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    </div>
-</nav>
+{% block content %}
+<h1>Digite seu sistema de equações</h1>
 
-<main>
-    <h1>Digite seu sistema de equações</h1>
-
-    <div class="equation-container">
-        <div id="equations-list">
-            <div class="equation-row">
-                <input type="text" class="eq-input" value="x - 3" placeholder="Ex: 2x + 1">
-                ≡ <input type="text" class="num-input" value="5" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')"> 
-                (mod <input type="text" class="num-input" value="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">)
-                <button class="btn-remove" onclick="removeEquation(this)">✖</button>
-            </div>
-            <div class="equation-row">
-                <input type="text" class="eq-input" value="17x" placeholder="Ex: x - 2">
-                ≡ <input type="text" class="num-input" value="5" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')"> 
-                (mod <input type="text" class="num-input" value="29" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">)
-                <button class="btn-remove" onclick="removeEquation(this)">✖</button>
-            </div>
+<div class="equation-container">
+    <div id="equations-list">
+        <div class="equation-row">
+            <input type="text" class="eq-input" value="x - 3" placeholder="Ex: 2x + 1">
+            ≡ <input type="text" class="num-input" value="5" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            (mod <input type="text" class="num-input" value="10" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">)
+            <button class="btn-remove" onclick="removeEquation(this)">✖</button>
         </div>
-        <button class="btn btn-add" onclick="addEquation()">+ Adicionar equação</button>
-        <button class="btn btn-generate" onclick="generateSteps()">GERAR PASSO A PASSO</button>
-    </div>
-
-    <div id="solution-container">
-        <h2>Resolução Passo a Passo</h2>
-        
-        <div class="step">
-            <div class="step-title">Passo 1: Verificação de Solução</div>
-            <p>Antes de resolver, calculamos se \( d = \text{mdc}(a, n) \) divide \( b \) para garantir que as equações têm solução.</p>
-            <br>
-            <p><strong>Equação 1:</strong> \( x - 3 \equiv 5 \implies x \equiv 8 \pmod{10} \)</p>
-            <p>\( \text{mdc}(1, 10) = 1 \). Como 1 divide 8, <strong>tem solução!</strong></p>
-            <br>
-            <p><strong>Equação 2:</strong> \( 17x \equiv 5 \pmod{29} \)</p>
-            <p>\( \text{mdc}(17, 29) = 1 \). Como 1 divide 5, <strong>tem solução!</strong></p>
-        </div>
-
-        <div class="step">
-            <div class="step-title">Passo 2: Simplificação das Equações</div>
-            <p>Agora, isolamos o \( x \) em cada equação para deixá-las no formato canônico \( x \equiv c \pmod m \).</p>
-            <br>
-            <p><strong>Equação 1:</strong> \( x \equiv 8 \pmod{10} \) (Já está simplificada)</p>
-            <br>
-            <p><strong>Equação 2:</strong> \( 17x \equiv 5 \pmod{29} \)</p>
-            <p>Sabemos que \( 17 \equiv -12 \pmod{29} \)</p>
-            <p>\( -12x \equiv 5 \pmod{29} \)</p>
-            <p>Multiplicamos ambos os lados por \(-1\):</p>
-            <p>\( 12x \equiv -5 \pmod{29} \)</p>
-            <p>Como \( -5 \equiv 24 \pmod{29} \):</p>
-            <p>\( 12x \equiv 24 \pmod{29} \)</p>
-            <p>Dividindo ambos os lados por 12:</p>
-            <p><strong>\( x \equiv 2 \pmod{29} \)</strong></p>
-        </div>
-
-        <div class="step">
-            <div class="step-title">Passo 3: Resolução do TCR</div>
-            <p>Com o sistema reduzido, aplicamos o Teorema Chinês dos Restos:</p>
-            <p>\( x \equiv 8 \pmod{10} \)</p>
-            <p>\( x \equiv 2 \pmod{29} \)</p>
-            <br>
-            <p><strong>Cálculo dos Módulos:</strong></p>
-            <p>\( M = 10 \cdot 29 = 290 \)</p>
-            <p>\( M_1 = 29, \ M_2 = 10 \)</p>
-            <br>
-            <p><strong>Inversos modulares (\( y_1 \) e \( y_2 \)):</strong></p>
-            <p>\( y_1 \cdot 29 \equiv 1 \pmod{10} \implies y_1 = 9 \)</p>
-            <p>\( y_2 \cdot 10 \equiv 1 \pmod{29} \implies y_2 = 3 \)</p>
-            <br>
-            <p><strong>Fórmula Final:</strong></p>
-            <p>\( x \equiv (8 \cdot 29 \cdot 9 + 2 \cdot 10 \cdot 3) \pmod{290} \)</p>
-            <p>\( x \equiv (2088 + 60) \pmod{290} \)</p>
-            <p>\( x \equiv 2148 \pmod{290} \)</p>
-            <p><strong>Solução: \( x \equiv 118 \pmod{290} \)</strong></p>
+        <div class="equation-row">
+            <input type="text" class="eq-input" value="17x" placeholder="Ex: x - 2">
+            ≡ <input type="text" class="num-input" value="5" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            (mod <input type="text" class="num-input" value="29" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">)
+            <button class="btn-remove" onclick="removeEquation(this)">✖</button>
         </div>
     </div>
-</main>
+    <button class="btn btn-add" onclick="addEquation()">+ Adicionar equação</button>
+    <button class="btn btn-generate" onclick="generateSteps()">GERAR PASSO A PASSO</button>
+</div>
 
-<footer>
-   <div class="footer-content">
-        <p>Computação@UFCG</p>
-        <p>Fundamentos de Matemática para Ciência da Computação 2 (FMCC2)</p>
-    </div>
-</footer>
-
-</body>
-</html>
+<div id="solution-container"></div>
+{% endblock %}
