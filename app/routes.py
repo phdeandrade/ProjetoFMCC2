@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify
 from app import app
 # Importamos a lógica que vamos criar para o TCR
-from app.tcr_solver import resolver_sistema_tcr
+from app.tcr_main import resolver_sistema_tcr
 
 @app.route('/')
 def index():
