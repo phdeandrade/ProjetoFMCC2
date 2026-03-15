@@ -7,30 +7,48 @@
     <title>{% block title %}TCR Descomplicado{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-    {% block head %}{% endblock %}
+{% block head %}{% endblock %}
 </head>
 <body data-theme="dark">
-
 <nav>
     <a href="{{ url_for('index') }}" class="logo">
         <img src="{{ url_for('static', filename='img/icone.png') }}" alt="Ícone" style="height: 30px; width: 30px">
         TCR Descomplicado
     </a>
+
     <div class="nav-links">
-    <a href="{{ url_for('about') }}"
-       class="nav-link {{ 'ativo' if request.endpoint == 'about' else '' }}">
-        Sobre o TCR
-    </a>
-    <a href="{{ url_for('info') }}"
-       class="nav-link {{ 'ativo' if request.endpoint == 'info' else '' }}">
-        Sobre o Projeto
-    </a>
-    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-</div>
+        <a href="{{ url_for('about') }}"
+           class="nav-link {{ 'ativo' if request.endpoint == 'about' else '' }}">
+            Sobre o TCR
+        </a>
+        <a href="{{ url_for('info') }}"
+           class="nav-link {{ 'ativo' if request.endpoint == 'info' else '' }}">
+            Sobre o Projeto
+        </a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+
+    <button class="nav-menu-btn" id="nav-menu-btn" aria-label="Menu" onclick="toggleNavMenu()">☰</button>
+
+    <div class="nav-dropdown" id="nav-dropdown">
+        <a href="{{ url_for('index') }}"
+           class="{{ 'ativo' if request.endpoint == 'index' else '' }}">
+            Início
+        </a>
+        <a href="{{ url_for('about') }}"
+           class="{{ 'ativo' if request.endpoint == 'about' else '' }}">
+            Sobre o TCR
+        </a>
+        <a href="{{ url_for('info') }}"
+           class="{{ 'ativo' if request.endpoint == 'info' else '' }}">
+            Sobre o Projeto
+        </a>
+        <button class="theme-toggle-dropdown" onclick="toggleTheme()">🌓 Alternar tema</button>
+    </div>
 </nav>
 
 <main>
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 </main>
 
 <footer>
@@ -40,5 +58,19 @@
     </div>
 </footer>
 
+<script>
+    function toggleNavMenu() {
+        const dropdown = document.getElementById('nav-dropdown');
+        dropdown.classList.toggle('aberto');
+    }
+
+    document.addEventListener('click', function(e) {
+        const btn = document.getElementById('nav-menu-btn');
+        const dropdown = document.getElementById('nav-dropdown');
+        if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('aberto');
+        }
+    });
+</script>
 </body>
 </html>
