@@ -17,7 +17,8 @@ let todosOsPassos = [];
 let modoResumo = false;
 
 /**
- * Inicializa a aplicação configurando o tema visual baseado no cache do navegador.
+ * Inicializa a aplicação configurando o tema visual baseado no cache do navegador
+ * e configura os atalhos de teclado ('Enter' para calcular e setinhas para navegar).
  */
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -30,6 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeAttribute('data-theme');
         if (themeBtn) themeBtn.textContent = '🌙';
     }
+
+    document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            generateSteps();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        const solutionContainer = document.getElementById('solution-container');
+        const containerVisivel = solutionContainer && solutionContainer.style.display === 'block';
+        
+        if (!containerVisivel || modoResumo) return;
+
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            avancarOuResumir();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (passoAtual > 0) {
+                irParaPasso(passoAtual - 1);
+            }
+        }
+    });
 });
 
 /**
