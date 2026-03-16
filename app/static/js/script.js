@@ -383,3 +383,29 @@ function avancarOuResumir() {
 
     atualizarControles();
 }
+
+/**
+ * Copia o resultado final matemático para a área de transferência do usuário.
+ * @param {string} texto - A string com a resposta.
+ */
+function copiarResultado(texto) {
+    navigator.clipboard.writeText(texto)
+        .then(() => {
+            const btn = document.getElementById('btn-copiar');
+            if (btn) {
+                const textoOriginal = btn.innerHTML;
+                
+                btn.innerHTML = '✅ Copiado!';
+                btn.style.opacity = '0.8';
+                
+                setTimeout(() => {
+                    btn.innerHTML = textoOriginal;
+                    btn.style.opacity = '1';
+                }, 2000);
+            }
+        })
+        .catch(e => {
+            console.log(e);
+            mostrarErro("Erro ao copiar a resposta.");
+        });
+}

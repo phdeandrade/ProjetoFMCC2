@@ -186,6 +186,9 @@ def passos3_4_5_tcr(restos, modulos):
         f"$x \\equiv {' + '.join(termos_formula)} \\pmod{{M}}$",
         f"$x \\equiv {' + '.join(termos_soma)} \\pmod{{{M}}}$",
         f"<strong>$x \\equiv {x_acumulado % M} \\pmod{{{M}}}$</strong>",
+        
+        f"<br><button class='btn' id='btn-copiar' onclick='copiarResultado(\"x ≡ {x_acumulado % M} (mod {M})\")' "
+        f"style='margin-top: 10px; background-color: var(--primary); color: white;'>📋 Copiar Resposta</button>"
     ]
 
     return linhas_p3, linhas_p4, linhas_p5
